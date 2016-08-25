@@ -1,0 +1,47 @@
+{
+	"STEP" : {
+		"mapping" : "summary/steps",
+		"type" : "integer",
+		"unit" : "step"		
+	},
+	"DISTANCE" : {
+		"mapping" : "summary/distances-0/distance",
+		"type" : "double",
+		"unit" : "Km"		
+	},
+	"INTENSE_ACTIVE_TIME" : {
+		"mapping" : "summary/veryActiveMinutes",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"MODERATE_ACTIVE_TIME" : {
+		"mapping" : "summary/fairlyActiveMinutes",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"SOFT_ACTIVE_TIME" : {
+		"mapping" : "summary/lightlyActiveMinutes",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"SEDENTARY_TIME" : {
+		"mapping" : "summary/sedentaryMinutes",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"CALORIES" : {
+		"mapping" : "summary/caloriesOut",
+		"type" : "double",
+		"unit" : "Kcal"			
+	},
+	"BURN_CALORIES" : {
+		"mapping" : "summary/activityCalories",
+		"type" : "double",
+		"unit" : "Kcal"			
+	},
+	"FLOORS" : {
+		"mapping" : "summary/floors",
+		"type" : "integer",
+		"unit" : "floor"			
+	}
+}
