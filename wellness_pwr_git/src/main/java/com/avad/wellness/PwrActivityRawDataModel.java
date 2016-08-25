@@ -19,7 +19,7 @@ public class PwrActivityRawDataModel {
 	int floors;
 	double latitude,longitude;
 	String location_name;
-	int time_offset;
+	String timezone;
 	
 	public String getProvider_id() {
 		return provider_id;
@@ -285,23 +285,17 @@ public class PwrActivityRawDataModel {
 		if( value instanceof String)
 			this.location_name = (String)value;
 	}
-	public int getTime_offset() {
-		return time_offset;
+	public String getTimezone() {
+		return timezone;
 	}
-	public void setTime_offset(int time_offset) {
-		this.time_offset = time_offset;
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
-	public void setTime_offset(Object value, MappingInfo typeInfo){
-		if( value instanceof Long){			
-			this.time_offset = ((Long)value).intValue();			
-		}else if( value instanceof Integer){	
-			this.time_offset = ((Integer)value).intValue();
-		}else if( value instanceof Double){
-			this.time_offset = ((Double)value).intValue();
-		}else if( value instanceof Float){
-			this.time_offset = ((Float)value).intValue();
-		}
+	public void setTimezone(Object value, MappingInfo typeInfo){
+		if( value instanceof String)
+			this.timezone = (String)value;
 	}
+	
 	
 
 }

@@ -38,7 +38,7 @@ public class ConverterTest extends TestCase {
     	JSONParser parser = new JSONParser();
     	Object obj;
 		try {
-			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\workspace\\wellness\\fitbit_today_acdtivity.json"));
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_today_acdtivity.json"));
 		
 	    	JSONObject jsonObject = (JSONObject)obj;
 	    	
@@ -71,7 +71,7 @@ public class ConverterTest extends TestCase {
     	JSONParser parser = new JSONParser();
     	Object obj;
 		try {
-			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\workspace\\wellness\\fitbit_today_acdtivity.json"));
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_today_acdtivity.json"));
 		
 	    	JSONObject jsonObject = (JSONObject)obj;
 	    	
@@ -105,8 +105,8 @@ public class ConverterTest extends TestCase {
     	Object obj;
     	Object mapping;
 		try {
-			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\workspace\\wellness\\fitbit_today_acdtivity.json"));
-			mapping = parser.parse( new FileReader("C:\\Users\\Administrator\\workspace\\wellness\\fitbit_activity_mapping.json"));
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_today_acdtivity.json"));
+			mapping = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_activity_mapping.json"));
 			
 			JSONObject inputSourceObject = (JSONObject)obj;
 			JSONObject mappingObject = (JSONObject)mapping;
@@ -138,6 +138,49 @@ public class ConverterTest extends TestCase {
 	    	assertEquals(1075,model.getSedentary_time());    	
 	    	
 	    	
+			
+		}catch( Exception e){
+			e.printStackTrace();
+			assertTrue(false);			
+		}
+    	
+    }
+    
+    public void testJawboneConvertAll(){
+    	JSONParser parser = new JSONParser();
+    	Object obj;
+    	Object mapping;
+		try {
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\jawbone_activity_day.json"));
+			mapping = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\jawbone_activity_mapping.json"));
+			
+			JSONObject inputSourceObject = (JSONObject)obj;
+			JSONObject mappingObject = (JSONObject)mapping;
+			
+			Map <String,MappingInfo> mappingHashMap = new HashMap<String,MappingInfo>();			
+			Set keySet = mappingObject.keySet();
+			Iterator it = keySet.iterator();
+			while(it.hasNext()){				
+				String key = (String)it.next();
+				
+				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
+				if( jsonObject != null){
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					mappingHashMap.put(key, mapInfo);
+				}
+			}
+			
+			Converter converter = new Converter(inputSourceObject, mappingHashMap);
+			PwrActivityRawDataModel model = converter.convert();	    	
+	    	if( model == null) assertTrue(false);    	
+	    	
+	    	assertEquals(1074, model.getStep());
+	    	assertEquals(0.788,model.getDistance());	    	
+	    	assertEquals(46.3727616826,model.getBurn_calories());
+	    	assertEquals(344,model.getLongest_active_time());
+	    	assertEquals(16260, model.getSedentary_time());
+	    	assertEquals("Asia/Seoul", model.getTimezone());
+	    		    	
 			
 		}catch( Exception e){
 			e.printStackTrace();

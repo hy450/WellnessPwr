@@ -126,9 +126,9 @@ public class Converter {
 		mapping = mappingHashMap.get("LOCATION_NAME");
 		if( mapping != null ) model.setLocation_name(getValue(mapping), mapping);
 		
-		//TIME_OFFSET		
-		mapping = mappingHashMap.get("TIME_OFFSET");
-		if( mapping != null ) model.setTime_offset(getValue(mapping), mapping);
+		//TIMEZONE		
+		mapping = mappingHashMap.get("TIMEZONE");
+		if( mapping != null ) model.setTimezone(getValue(mapping), mapping);
 		
 		
 		return model;		
