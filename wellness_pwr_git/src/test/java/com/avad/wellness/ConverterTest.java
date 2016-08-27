@@ -1,6 +1,7 @@
 package com.avad.wellness;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -181,6 +182,48 @@ public class ConverterTest extends TestCase {
 	    	assertEquals(16260, model.getSedentary_time());
 	    	assertEquals("Asia/Seoul", model.getTimezone());
 	    		    	
+			
+		}catch( Exception e){
+			e.printStackTrace();
+			assertTrue(false);			
+		}
+    	
+    }
+    
+    public void testFibitFoodTest(){
+    	JSONParser parser = new JSONParser();
+    	Object obj;
+    	Object mapping;
+		try {
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_today_food.json"));
+			mapping = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_food_mapping.json"));
+			
+			JSONObject inputSourceObject = (JSONObject)obj;
+			JSONObject mappingObject = (JSONObject)mapping;
+			
+			Map <String,MappingInfo> mappingHashMap = new HashMap<String,MappingInfo>();			
+			Set keySet = mappingObject.keySet();
+			Iterator it = keySet.iterator();
+			while(it.hasNext()){				
+				String key = (String)it.next();
+				
+				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
+				if( jsonObject != null){
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					mappingHashMap.put(key, mapInfo);
+				}
+			}
+			
+			Converter converter = new Converter(inputSourceObject, mappingHashMap);
+			ArrayList<PwrActivityFoodRawDtlDataModel>  model = converter.convertFood();	    	
+	    	if( model == null) assertTrue(false);    	
+	    	
+	    	assertEquals(3, model.size());
+	    	assertEquals("쌀밥", model.get(0).food_name);
+	    	assertEquals("배추김치", model.get(1).food_name);
+	    	assertEquals("김", model.get(2).food_name);	    	    	
+	    	
+	    	
 			
 		}catch( Exception e){
 			e.printStackTrace();

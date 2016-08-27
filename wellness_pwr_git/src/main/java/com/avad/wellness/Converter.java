@@ -1,6 +1,7 @@
 package com.avad.wellness;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class Converter {
 	
 	public static String SEPERATOR = "/"; 
 	public static String TYPE_SEPERATOR = "-";
+	public static String STAR = "*";
 	
 	Map <String,MappingInfo> mappingHashMap;
 	JSONObject rootObject;
@@ -134,6 +136,139 @@ public class Converter {
 		return model;		
 	}
 	
+	/**
+	 * mapping 정보를 기반으로 PwrActivityRawDataModel type 으로 return
+	 * @return
+	 */
+	public ArrayList<PwrActivityFoodRawDtlDataModel> convertFood() {
+		
+		ArrayList<PwrActivityFoodRawDtlDataModel> list = null;
+		
+		if( mappingHashMap == null || mappingHashMap.size() <= 0) return null;
+		if( this.rootObject == null ) return null;		
+		
+		list = new ArrayList<PwrActivityFoodRawDtlDataModel>();
+		
+		
+		
+		MappingInfo mapping;		
+		//ITEM_BASE
+		mapping = mappingHashMap.get("ITEM_BASE");
+		if( mapping != null ) {
+			JSONObject jsonRootObject ;
+			
+			String key = mapping.getMapping();
+			if( key.isEmpty()){
+				//base info가 존재 하지 않음	
+				
+				//이전과 동일하게
+			}else {
+				//존재함.
+				if( key.contains(STAR) ) {
+					
+					String tempMappingInfos[] = key.split(TYPE_SEPERATOR);
+					//multi					
+					JSONArray jsonArrays = (JSONArray)rootObject.get(tempMappingInfos[0]); 
+					if( jsonArrays != null && jsonArrays.size() > 0 ){
+						for( int i=0; i < jsonArrays.size(); i++){
+							
+							PwrActivityFoodRawDtlDataModel model = new PwrActivityFoodRawDtlDataModel();
+							
+							JSONObject tempJson = (JSONObject)jsonArrays.get(i);
+							
+							
+							MappingInfo tempmapping = mappingHashMap.get("FOOD_NAME");
+							if( tempmapping != null ) model.setFoodName(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("FOOD_NAME");
+							if( tempmapping != null ) model.setFoodName(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							list.add(model);
+							
+						}
+					}
+					
+					
+				}else {
+					//single
+					JSONObject jsonObject = (JSONObject)rootObject.get(key);
+					
+					
+					MappingInfo tempmapping = mappingHashMap.get("FOOD_NAME");
+					
+				}
+			}
+			
+		}
+		
+		
+		
+		
+		return list;		
+	}
+	
+	private Object getValue(int index,JSONObject jsonData ,MappingInfo mappingInfo){
+		
+		JSONObject tempJson = jsonData;
+		Object retValue = null;
+		
+		//mapping 정보를 가져온다.
+		String key = mappingInfo.getMapping();
+		
+		//mapping 정보를  parsing 한다.
+		String path[] = key.split(SEPERATOR);
+		if( path != null && path.length > 0){
+			
+			//각 path 에 대허서 check			
+			int count = 0;
+			for( String pathKey : path){				
+				
+				String keyItems[] = pathKey.split(TYPE_SEPERATOR);
+				
+				if( keyItems!=null){
+					if( keyItems.length == 1 ){
+						//단일 Item 이다.
+						if( count >= path.length -1){
+							//마지막 자료이면 Value 이다.
+							retValue = tempJson.get(keyItems[0]);
+							
+						}else {
+							tempJson = (JSONObject)tempJson.get(keyItems[0]);
+						}
+						
+					}else if( keyItems.length > 1 ) {
+					
+						//int index = Integer.parseInt(keyItems[1]); 						
+						JSONArray jsonArray = (JSONArray)tempJson.get(keyItems[0]);
+						
+						if( jsonArray == null || jsonArray.isEmpty()) return null;
+						
+						if( count >= path.length -1){
+							//마지막 자료이면 Value 이다.
+							retValue = jsonArray.get(index);
+						}else {						
+							tempJson = (JSONObject)jsonArray.get(index);
+						}
+					}					
+					
+					
+				}
+				count++;				
+			}
+			return retValue;
+			
+		}else{
+			//mapping 정보가 올바르지 않음.
+			return null;
+		}	
+		
+	}	
+	
+	/**
+	 * 아이템이 한개 인경우 사용
+	 * @param mappingInfo
+	 * @return
+	 */
 	private Object getValue(MappingInfo mappingInfo){
 		
 		JSONObject tempJson = rootObject;
@@ -164,7 +299,7 @@ public class Converter {
 						}
 						
 					}else if( keyItems.length > 1 ) {
-						//2개 이상이면 배열 정보이다.
+					
 						int index = Integer.parseInt(keyItems[1]); 						
 						JSONArray jsonArray = (JSONArray)tempJson.get(keyItems[0]);
 						
@@ -176,8 +311,8 @@ public class Converter {
 						}else {						
 							tempJson = (JSONObject)jsonArray.get(index);
 						}
-						
-					}
+					}					
+					
 					
 				}
 				count++;				
@@ -188,6 +323,6 @@ public class Converter {
 			//mapping 정보가 올바르지 않음.
 			return null;
 		}
-	}	
+	}
 
 }

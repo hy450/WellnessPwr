@@ -34,6 +34,11 @@ public class PwrActivityFoodRawDtlDataModel {
 	double calcium;
 	double iron;	
 	
+	public void setFoodName(Object value, MappingInfo typeInfo){
+		if( value instanceof String)
+			this.food_name = (String)value;
+	}
+	
 
 
 }

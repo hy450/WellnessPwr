@@ -2,3 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
+encoding/fitbit_today_food.json=UTF-8
+encoding/fitbit_today_sleep.json=UTF-8
+encoding/jawbone_activity_day.json=UTF-8
+encoding/jawbone_activity_mapping.json=UTF-8

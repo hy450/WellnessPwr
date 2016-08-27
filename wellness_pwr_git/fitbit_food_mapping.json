@@ -5,6 +5,16 @@
 	},
  	"FOOD_NAME" : {
  		"mapping" : "loggedFood/name",
- 		"type: : "string"
+ 		"type" : "string"
+ 	},
+ 	"AMOUNT" : {
+ 		"mapping" : "loggedFood/amount",
+ 		"type" : "double"
+ 	},
+ 	"AMOUNT" : {
+ 		"mapping" : "loggedFood/calories",
+ 		"type" : "double",
+ 		"unit" : "Kcal"
  	}
+ 	
 }
