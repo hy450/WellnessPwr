@@ -1,0 +1,126 @@
+
+{
+  "foods":  [
+     {
+      "isFavorite": false,
+      "logDate": "2016-08-27",
+      "logId": 8455420165,
+      "loggedFood":  {
+        "accessLevel": "PUBLIC",
+        "amount": 1,
+        "brand": "",
+        "calories": 271,
+        "foodId": 532561716,
+        "locale": "ko_KR",
+        "mealTypeId": 1,
+        "name": "½Ò¹ä",
+        "unit":  {
+          "id": 673,
+          "name": "°ø±â",
+          "plural": "°ø±â"
+        },
+        "units":  [
+          673,
+          572,
+          686,
+          226,
+          180,
+          147,
+          389
+        ]
+      },
+      "nutritionalValues":  {
+        "calories": 271,
+        "carbs": 59.67,
+        "fat": 0.44,
+        "fiber": 0.6,
+        "protein": 4.97,
+        "sodium": 491
+      }
+    },
+     {
+      "isFavorite": false,
+      "logDate": "2016-08-27",
+      "logId": 8455488816,
+      "loggedFood":  {
+        "accessLevel": "PUBLIC",
+        "amount": 1,
+        "brand": "",
+        "calories": 8,
+        "foodId": 532568522,
+        "locale": "ko_KR",
+        "mealTypeId": 1,
+        "name": "¹èÃß±èÄ¡",
+        "unit":  {
+          "id": 669,
+          "name": "ÀÎºÐ (38 g)",
+          "plural": "ÀÎºÐ (38 g)"
+        },
+        "units":  [
+          669,
+          655,
+          226,
+          180,
+          147,
+          389
+        ]
+      },
+      "nutritionalValues":  {
+        "calories": 8,
+        "carbs": 1.58,
+        "fat": 0.12,
+        "fiber": 0.5,
+        "protein": 0.66,
+        "sodium": 245
+      }
+    },
+     {
+      "isFavorite": false,
+      "logDate": "2016-08-27",
+      "logId": 8456541004,
+      "loggedFood":  {
+        "accessLevel": "PUBLIC",
+        "amount": 10,
+        "brand": "",
+        "calories": 9,
+        "foodId": 532556746,
+        "locale": "ko_KR",
+        "mealTypeId": 1,
+        "name": "±è",
+        "unit":  {
+          "id": 606,
+          "name": "Àå",
+          "plural": "Àå"
+        },
+        "units":  [
+          606,
+          226,
+          180,
+          147,
+          389
+        ]
+      },
+      "nutritionalValues":  {
+        "calories": 9,
+        "carbs": 1.33,
+        "fat": 0.07,
+        "fiber": 0.1,
+        "protein": 1.51,
+        "sodium": 12
+      }
+    }
+  ],
+  "goals":  {
+    "calories": 1349,
+    "estimatedCaloriesOut": 1849
+  },
+  "summary":  {
+    "calories": 288,
+    "carbs": 62.58,
+    "fat": 0.63,
+    "fiber": 1.2,
+    "protein": 7.14,
+    "sodium": 748,
+    "water": 500
+  }
+}

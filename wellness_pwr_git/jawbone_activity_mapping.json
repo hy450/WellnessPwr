@@ -1,0 +1,31 @@
+{
+	"STEP" : {
+		"mapping" : "data/items-0/details/steps",
+		"type" : "integer",
+		"unit" : "step"		
+	},
+	"DISTANCE" : {
+		"mapping" : "data/items-0/details/km",
+		"type" : "double",
+		"unit" : "Km"		
+	},	
+	"SEDENTARY_TIME" : {
+		"mapping" : "data/items-0/details/inactive_time",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"BURN_CALORIES" : {
+		"mapping" : "data/items-0/details/calories",
+		"type" : "double",
+		"unit" : "Kcal"			
+	},
+	"LONGEST_ACTIVE_TIME" : {
+		"mapping" : "data/items-0/details/longest_active",
+		"type" : "integer",
+		"unit" : "minutes"			
+	},
+	"TIMEZONE" : {
+		"mapping" : "data/items-0/details/tz",
+		"type" : "string"		
+	}
+}
