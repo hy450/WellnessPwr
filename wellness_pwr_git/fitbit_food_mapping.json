@@ -1,0 +1,10 @@
+{
+	"ITEM_BASE" : {
+		"mapping" : "foods-*",
+		"type" : "multi"
+	},
+ 	"FOOD_NAME" : {
+ 		"mapping" : "loggedFood/name",
+ 		"type: : "string"
+ 	}
+}
