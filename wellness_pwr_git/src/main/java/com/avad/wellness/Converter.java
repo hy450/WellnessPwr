@@ -68,7 +68,7 @@ public class Converter {
 	 * mapping 정보를 기반으로 PwrActivityRawDataModel type 으로 return
 	 * @return
 	 */
-	public PwrActivityRawDataModel convert() {
+	public PwrActivityRawDataModel convertAct() {
 		
 		if( mappingHashMap == null || mappingHashMap.size() <= 0) return null;
 		if( this.rootObject == null ) return null;		
@@ -155,7 +155,7 @@ public class Converter {
 		//ITEM_BASE
 		mapping = mappingHashMap.get("ITEM_BASE");
 		if( mapping != null ) {
-			JSONObject jsonRootObject ;
+			JSONObject jsonRootObject = rootObject;
 			
 			String key = mapping.getMapping();
 			if( key.isEmpty()){
@@ -166,9 +166,16 @@ public class Converter {
 				//존재함.
 				if( key.contains(STAR) ) {
 					
-					String tempMappingInfos[] = key.split(TYPE_SEPERATOR);
+					String tempFieldMappingInfos[] = key.split(SEPERATOR);
+					for( int i=0 ; i < tempFieldMappingInfos.length -1 ; i++){
+						jsonRootObject = (JSONObject)jsonRootObject.get(tempFieldMappingInfos[i]);
+					}
+					
+					String lastKey = tempFieldMappingInfos[tempFieldMappingInfos.length-1];					
+					String tempMappingInfos[] = lastKey.split(TYPE_SEPERATOR);
+					
 					//multi					
-					JSONArray jsonArrays = (JSONArray)rootObject.get(tempMappingInfos[0]); 
+					JSONArray jsonArrays = (JSONArray)jsonRootObject.get(tempMappingInfos[0]); 
 					if( jsonArrays != null && jsonArrays.size() > 0 ){
 						for( int i=0; i < jsonArrays.size(); i++){
 							
@@ -180,8 +187,29 @@ public class Converter {
 							MappingInfo tempmapping = mappingHashMap.get("FOOD_NAME");
 							if( tempmapping != null ) model.setFoodName(getValue(i,tempJson,tempmapping), tempmapping);
 							
-							tempmapping = mappingHashMap.get("FOOD_NAME");
-							if( tempmapping != null ) model.setFoodName(getValue(i,tempJson,tempmapping), tempmapping);
+							tempmapping = mappingHashMap.get("AMOUNT");
+							if( tempmapping != null ) model.setAmount(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("CALORIE");
+							if( tempmapping != null ) model.setCalorie(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("MEAL_TYPE");
+							if( tempmapping != null ) model.setMeal_type(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("TOTAL_FAT");
+							if( tempmapping != null ) model.setTotal_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("CARBOHYDRATE");
+							if( tempmapping != null ) model.setCarbohydrate(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("DIETARY_FIBER");
+							if( tempmapping != null ) model.setDietary_fiber(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("PROTEIN");
+							if( tempmapping != null ) model.setProtein(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SODIUM");
+							if( tempmapping != null ) model.setSodium(getValue(i,tempJson,tempmapping), tempmapping);
 							
 							list.add(model);
 							
@@ -191,7 +219,7 @@ public class Converter {
 					
 				}else {
 					//single
-					JSONObject jsonObject = (JSONObject)rootObject.get(key);
+					JSONObject jsonObject = (JSONObject)jsonRootObject.get(key);
 					
 					
 					MappingInfo tempmapping = mappingHashMap.get("FOOD_NAME");

@@ -11,10 +11,41 @@
  		"mapping" : "loggedFood/amount",
  		"type" : "double"
  	},
- 	"AMOUNT" : {
+ 	"CALORIE" : {
  		"mapping" : "loggedFood/calories",
  		"type" : "double",
  		"unit" : "Kcal"
- 	}
+ 	},
+ 	"MEAL_TYPE" : {
+ 		"mapping" : "loggedFood/mealTypeId",
+ 		"type" : "integer",
+ 		"value_trasform" : {
+ 		}
+ 	},
+ 	"TOTAL_FAT" : {
+ 		"mapping" : "nutritionalValues/fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"CARBOHYDRATE" : {
+ 		"mapping" : "nutritionalValues/carbs",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"DIETARY_FIBER" : {
+ 		"mapping" : "nutritionalValues/fiber",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"PROTEIN" : {
+ 		"mapping" : "nutritionalValues/protein",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"SODIUM" : {
+ 		"mapping" : "nutritionalValues/sodium",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
  	
 }
