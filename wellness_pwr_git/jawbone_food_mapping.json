@@ -1,0 +1,17 @@
+{
+	"ITEM_BASE" : {
+		"mapping" : "data/items-*",
+		"type" : "multi"
+	},
+ 	"DIETARY_FIBER" : {
+ 		"mapping" : "details/fiber",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"CALORIE" : {
+ 		"mapping" : "details/calories",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	
+}
