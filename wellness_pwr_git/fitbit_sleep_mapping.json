@@ -1,0 +1,39 @@
+{
+	"ITEM_BASE" : {
+		"mapping" : "sleep-*",
+		"type" : "multi"
+	},
+	"AWAKE_COUNT" : {
+		"mapping" : "awakeCount",
+ 		"type" : "integer", 		
+ 		"unit" : "minutes"		
+	},
+	"AWAKE_DURATION" : {
+		"mapping" : "awakeDuration",
+ 		"type" : "integer", 		
+ 		"unit" : "minutes"		
+	},
+	"SLEEP_EFFICIENCY" : {
+		"mapping" : "efficiency",
+ 		"type" : "integer", 		
+ 		"unit" : "percentage"	
+	},
+	"SLEEP_DURATION" : {
+		"mapping" : "duration",
+ 		"type" : "integer", 		
+ 		"unit" : "milliseconds"	
+	},
+	"SLEEP_LATENCY" : {
+		"mapping" : "minutesToFallAsleep",
+ 		"type" : "integer", 		
+ 		"unit" : "minutes"	
+	},
+	"ASLEEP_TIME" : {
+		"mapping" : "startTime",
+ 		"type" : "string",
+ 		"unit" : "date",
+ 		"format" : "yyyy-MM-dd'T'HH:mm:ss.SSS"
+	},
+ 	
+ 	
+}
