@@ -47,5 +47,10 @@
  		"type" : "double", 		
  		"unit" : "g"
  	},
+ 	"CALCIUM" : {
+ 		"mapping" : "nutritionalValues/calcium",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
  	
 }

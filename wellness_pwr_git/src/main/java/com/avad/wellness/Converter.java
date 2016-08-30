@@ -49,7 +49,7 @@ public class Converter {
 				
 				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
 				if( jsonObject != null){
-					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
 					mappingHashMap.put(key, mapInfo);
 				}
 			}
@@ -208,8 +208,41 @@ public class Converter {
 							tempmapping = mappingHashMap.get("PROTEIN");
 							if( tempmapping != null ) model.setProtein(getValue(i,tempJson,tempmapping), tempmapping);
 							
+							tempmapping = mappingHashMap.get("UNSATURATED_FAT");
+							if( tempmapping != null ) model.setUnsaturated_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
 							tempmapping = mappingHashMap.get("SODIUM");
 							if( tempmapping != null ) model.setSodium(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("POLYSATURATED_FAT");
+							if( tempmapping != null ) model.setPolysaturated_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("POTASSIUM");
+							if( tempmapping != null ) model.setPotassium(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("TRANS_FAT");
+							if( tempmapping != null ) model.setTrans_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SATURATED_FAT");
+							if( tempmapping != null ) model.setSaturated_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("MONOSATURATED_FAT");
+							if( tempmapping != null ) model.setMonosaturated_fat(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("VITAMIN_C");
+							if( tempmapping != null ) model.setVitamin_c(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("VITAMIN_D");
+							if( tempmapping != null ) model.setVitamin_d(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SUGAR");
+							if( tempmapping != null ) model.setSugar(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("IRON");
+							if( tempmapping != null ) model.setIron(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("CHOLESTEROL");
+							if( tempmapping != null ) model.setCholestrol(getValue(i,tempJson,tempmapping), tempmapping);
 							
 							list.add(model);
 							
@@ -233,6 +266,87 @@ public class Converter {
 		
 		
 		return list;		
+	}
+	
+	public ArrayList<PwrSleepRawDataModel> convertSleep() {
+		ArrayList<PwrSleepRawDataModel> list = null;
+		
+		if( mappingHashMap == null || mappingHashMap.size() <= 0) return null;
+		if( this.rootObject == null ) return null;		
+		
+		list = new ArrayList<PwrSleepRawDataModel>();
+		
+		
+		
+		MappingInfo mapping;		
+		//ITEM_BASE
+		mapping = mappingHashMap.get("ITEM_BASE");
+		if( mapping != null ) {
+			JSONObject jsonRootObject = rootObject;
+			
+			String key = mapping.getMapping();
+			if( key.isEmpty()){
+				//base info가 존재 하지 않음	
+				
+				//이전과 동일하게
+			}else {
+				//존재함.
+				if( key.contains(STAR) ) {
+					
+					String tempFieldMappingInfos[] = key.split(SEPERATOR);
+					for( int i=0 ; i < tempFieldMappingInfos.length -1 ; i++){
+						jsonRootObject = (JSONObject)jsonRootObject.get(tempFieldMappingInfos[i]);
+					}
+					
+					String lastKey = tempFieldMappingInfos[tempFieldMappingInfos.length-1];					
+					String tempMappingInfos[] = lastKey.split(TYPE_SEPERATOR);
+					
+					//multi					
+					JSONArray jsonArrays = (JSONArray)jsonRootObject.get(tempMappingInfos[0]); 
+					if( jsonArrays != null && jsonArrays.size() > 0 ){
+						for( int i=0; i < jsonArrays.size(); i++){
+							
+							PwrSleepRawDataModel model = new PwrSleepRawDataModel();
+							
+							JSONObject tempJson = (JSONObject)jsonArrays.get(i);							
+							
+							MappingInfo tempmapping = mappingHashMap.get("AWAKE_COUNT");
+							if( tempmapping != null ) model.setAwake_count(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("AWAKE_DURATION");
+							if( tempmapping != null ) model.setAwake_duration(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SLEEP_EFFICIENCY");
+							if( tempmapping != null ) model.setSleep_efficiency(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SLEEP_DURATION");
+							if( tempmapping != null ) model.setSleep_duration(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							tempmapping = mappingHashMap.get("SLEEP_LATENCY");
+							if( tempmapping != null ) model.setSleep_latency(getValue(i,tempJson,tempmapping), tempmapping);							
+							
+							tempmapping = mappingHashMap.get("ASLEEP_TIME");
+							if( tempmapping != null ) model.setAsleep_time(getValue(i,tempJson,tempmapping), tempmapping);
+							
+							list.add(model);
+							
+						}
+					}
+					
+					
+				}else {
+					//single
+					JSONObject jsonObject = (JSONObject)jsonRootObject.get(key);					
+					
+					MappingInfo tempmapping = mappingHashMap.get("FOOD_NAME");
+					
+				}
+			}
+			
+		}
+		
+		return list;	
+		
 	}
 	
 	private Object getValue(int index,JSONObject jsonData ,MappingInfo mappingInfo){

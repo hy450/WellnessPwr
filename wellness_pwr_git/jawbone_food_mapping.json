@@ -13,5 +13,74 @@
  		"type" : "double", 		
  		"unit" : "g"
  	},
- 	
+ 	"POLYSATURATED_FAT": {
+ 		"mapping" : "details/polyunsaturated_fat",
+ 		"type" : "double", 		
+ 		"unit" : "g" 	
+ 	},
+ 	"POTASSIUM" : {
+ 		"mapping" : "details/potassium",
+ 		"type" : "double", 		
+ 		"unit" : "g" 	
+ 	},
+ 	"CARBOHYDRATE" : {
+ 		"mapping" : "details/carbohydrate",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"TRANS_FAT" : {
+ 		"mapping" : "details/trans_fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"SATURATED_FAT" : {
+ 		"mapping" : "details/saturated_fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"MONOSATURATED_FAT" : {
+ 		"mapping" : "details/monounsaturated_fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"TOTAL_FAT" : {
+ 		"mapping" : "details/fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"UNSATURATED_FAT" : {
+ 		"mapping" : "details/unsaturated_fat",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"PROTEIN" : {
+ 		"mapping" : "details/protein",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"SODIUM" : {
+ 		"mapping" : "details/sodium",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"VITAMIN_C" : {
+ 		"mapping" : "details/vitamin_c",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ "SUGAR" : {
+ 		"mapping" : "details/sugar",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"IRON" : {
+ 		"mapping" : "details/iron",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
+ 	"CHOLESTEROL" : {
+ 		"mapping" : "details/cholesterol",
+ 		"type" : "double", 		
+ 		"unit" : "g"
+ 	},
 }

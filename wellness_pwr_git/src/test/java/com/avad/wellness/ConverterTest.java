@@ -46,7 +46,7 @@ public class ConverterTest extends TestCase {
 	    	Map <String,MappingInfo> mappingHashMap;
 	    	mappingHashMap = new HashMap<String,MappingInfo>();
 	    	
-	    	MappingInfo mappinginfo = new MappingInfo("summary/steps","integer","step");
+	    	MappingInfo mappinginfo = new MappingInfo("summary/steps","integer","step","");
 	    	mappingHashMap.put("STEP", mappinginfo);
 	    	
 	    	Converter converter = new Converter(jsonObject, mappingHashMap);
@@ -80,7 +80,8 @@ public class ConverterTest extends TestCase {
 	    	mappingHashMap = new HashMap<String,MappingInfo>(); 	
 
 	    	
-	    	MappingInfo mappinginfo1 = new MappingInfo("summary/distances-0/distance","double","Km");
+	    	MappingInfo mappinginfo1 = new MappingInfo("summary/distances-0/distance","double","Km","");
+	    	
 	    	mappingHashMap.put("DISTANCE", mappinginfo1);
 	    	
 	    	Converter converter = new Converter(jsonObject, mappingHashMap);
@@ -120,7 +121,7 @@ public class ConverterTest extends TestCase {
 				
 				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
 				if( jsonObject != null){
-					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
 					mappingHashMap.put(key, mapInfo);
 				}
 			}
@@ -166,7 +167,7 @@ public class ConverterTest extends TestCase {
 				
 				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
 				if( jsonObject != null){
-					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
 					mappingHashMap.put(key, mapInfo);
 				}
 			}
@@ -209,7 +210,7 @@ public class ConverterTest extends TestCase {
 				
 				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
 				if( jsonObject != null){
-					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
 					mappingHashMap.put(key, mapInfo);
 				}
 			}
@@ -260,6 +261,50 @@ public class ConverterTest extends TestCase {
     	
     }
     
+    public void testFibitSleepTest(){
+    	JSONParser parser = new JSONParser();
+    	Object obj;
+    	Object mapping;
+		try {
+			obj = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_today_sleep.json"));
+			mapping = parser.parse( new FileReader("C:\\Users\\Administrator\\git\\WellnessPwr\\wellness_pwr_git\\fitbit_sleep_mapping.json"));
+			
+			JSONObject inputSourceObject = (JSONObject)obj;
+			JSONObject mappingObject = (JSONObject)mapping;
+			
+			Map <String,MappingInfo> mappingHashMap = new HashMap<String,MappingInfo>();			
+			Set keySet = mappingObject.keySet();
+			Iterator it = keySet.iterator();
+			while(it.hasNext()){				
+				String key = (String)it.next();
+				
+				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
+				if( jsonObject != null){
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
+					mappingHashMap.put(key, mapInfo);
+				}
+			}
+			
+			Converter converter = new Converter(inputSourceObject, mappingHashMap);
+			ArrayList<PwrSleepRawDataModel>  model = converter.convertSleep();	    	
+	    	if( model == null) assertTrue(false);    	
+	    	
+	    	assertEquals(1, model.size());
+	    	assertEquals(19, model.get(0).awake_count);	    	
+	    	assertEquals(68, model.get(0).awake_duration);
+	    	assertEquals(84.0, model.get(0).sleep_efficiency);
+	    	assertEquals(2, model.get(0).sleep_latency);
+	    	assertEquals(57660, model.get(0).sleep_duration);
+	    	assertEquals(1471332540, model.get(0).asleep_time);	    	
+	    	
+			
+		}catch( Exception e){
+			e.printStackTrace();
+			assertTrue(false);			
+		}
+    	
+    }
+    
     public void testJawboneFoodTest(){
     	JSONParser parser = new JSONParser();
     	Object obj;
@@ -279,7 +324,7 @@ public class ConverterTest extends TestCase {
 				
 				JSONObject jsonObject = (JSONObject)mappingObject.get(key);
 				if( jsonObject != null){
-					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"));				
+					MappingInfo mapInfo = new MappingInfo((String)jsonObject.get("mapping"), (String)jsonObject.get("type"), (String)jsonObject.get("unit"),(String)jsonObject.get("format"));				
 					mappingHashMap.put(key, mapInfo);
 				}
 			}
@@ -290,6 +335,25 @@ public class ConverterTest extends TestCase {
 	    	
 	    	assertEquals(3.2888888, model.get(0).dietary_fiber);
 	    	assertEquals(975.3333, model.get(0).calorie);
+	    	assertEquals(1.8441111, model.get(0).polysaturated_fat);
+	    	assertEquals(401.55556, model.get(0).potassium);
+	    	assertEquals(203.97778, model.get(0).carbohydrate);
+	    	assertEquals(0.0, model.get(0).trans_fat);
+	    	assertEquals(0.0, model.get(0).saturated_fat);
+	    	assertEquals(23.3, model.get(0).protein);
+	    	assertEquals(1.06666664, model.get(0).monosaturated_fat);
+	    	assertEquals(1694.1111, model.get(0).sodium);
+	    	assertEquals(0.0, model.get(0).vitamin_c);
+	    	assertEquals(4.2744444, model.get(0).total_fat);
+	    	assertEquals(2.9107778, model.get(0).unsaturated_fat);
+	    	assertEquals(1.46444443, model.get(0).sugar);
+	    	assertEquals(54.11111, model.get(0).iron);
+	    	assertEquals(0.0, model.get(0).cholestrol);
+	    	
+	    	
+	    	assertEquals(3.2888888, model.get(1).dietary_fiber);
+	    	assertEquals(975.3333, model.get(1).calorie);
+	    	assertEquals(1.8441111, model.get(1).polysaturated_fat);
 	    	
 	    	
 	    	
