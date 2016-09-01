@@ -15,11 +15,11 @@ public class NutrientIntakeStandardIndicator {
 	 */
 	public String getCarbohydrateIndicate(double percentage){
 		String []DESCS = {"매우 부족","부족","적절","과잉","매우 과잉"};
-		int []CODES = {-2,-1,0,1,2};		
+		int []CODES = {-2,-1,0,1,2};
 		double LEVELS[] ={ 45,55,65.1,70.1};
 		
 		int i=0;
-		for( ; i < LEVELS.length; i++ ){			
+		for( ; i < LEVELS.length; i++ ){
 			if( percentage < LEVELS[i] ) break;
 		}
 		
@@ -178,7 +178,7 @@ public class NutrientIntakeStandardIndicator {
 	 * @param isMan 남성이면 true 여성이면 false
 	 * @return
 	 */
-	public String getIroIndicate( double mg , int age, boolean isMan){
+	public String getIronIndicate( double mg , int age, boolean isMan){
 		String []DESCS = {"매우 부족","부족","적절","과잉","매우 과잉"};
 		int []CODES = {-2,-1,0,1,2};
 		double LEVELS[]= null;
@@ -220,8 +220,7 @@ public class NutrientIntakeStandardIndicator {
 		int []CODES = {0,1};
 		double LEVELS[] = null;
 		
-		if( age < 19 || age > 64 ) return convertErrorIndicate();	
-
+		if( age < 19 || age > 64 ) return convertErrorIndicate();
 		
 		if( age >= 19 && age < 30 ){
 			if( isMan) {
@@ -251,7 +250,42 @@ public class NutrientIntakeStandardIndicator {
 		}		
 		return convertIndicate(ml, DESCS,CODES,LEVELS);
 		
+	}
+	
+	public String getSugarIndicate( double g , int age,boolean isMan ){
+		String []DESCS = {"적절","개선필요","위험"};
+		int []CODES = {0,1,2};
+		double LEVELS[] = null;
 		
+		if( age < 19 || age > 64 ) return convertErrorIndicate();
+		
+		if( age >= 19 && age < 30 ){
+			if( isMan) {
+				double TEMP_LEVELS[] = {65,97.5};
+				LEVELS = TEMP_LEVELS;
+			}else {
+				double TEMP_LEVELS[] = {52.5,78.75};
+				LEVELS = TEMP_LEVELS;				
+			}
+		}else if( age >= 30 && age < 50 ){
+			if( isMan) {
+				double TEMP_LEVELS[] = {60,90};
+				LEVELS = TEMP_LEVELS;
+			}else {
+				double TEMP_LEVELS[] = {47.5,71.25};
+				LEVELS = TEMP_LEVELS;				
+			}
+			
+		}else if( age >= 50 && age < 65) {
+			if( isMan) {
+				double TEMP_LEVELS[] = {55,82.5};
+				LEVELS = TEMP_LEVELS;
+			}else {
+				double TEMP_LEVELS[] = {45,67.5};
+				LEVELS = TEMP_LEVELS;				
+			}			
+		}		
+		return convertIndicate(g, DESCS,CODES,LEVELS);
 		
 	}
 	

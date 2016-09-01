@@ -136,19 +136,19 @@ public class NutrientIntakeStandardTest extends TestCase {
 	    	assertEquals(jsonObject.get("desc"), "부족");
 	    	
 	    	json = indi.getUnsaturatedFatIndicate(11);
-			jsonObject = (JSONObject) jsonParser.parse(json);			
+			jsonObject = (JSONObject) jsonParser.parse(json);
 
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == 0);
 	    	assertEquals(jsonObject.get("desc"), "적절");
 	    	
 	    	json = indi.getUnsaturatedFatIndicate(11.1);
-			jsonObject = (JSONObject) jsonParser.parse(json);			
+			jsonObject = (JSONObject) jsonParser.parse(json);
 
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == 1);
 	    	assertEquals(jsonObject.get("desc"), "충분");
 	    	
 	    	json = indi.getUnsaturatedFatIndicate(25.1);
-			jsonObject = (JSONObject) jsonParser.parse(json);			
+			jsonObject = (JSONObject) jsonParser.parse(json);
 
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == 2);
 	    	assertEquals(jsonObject.get("desc"), "과잉");
@@ -212,19 +212,19 @@ public class NutrientIntakeStandardTest extends TestCase {
     	JSONObject jsonObject;
 		try {
 			String json = indi.getTotalCalorieIndicate(1599, 19, true);
-			jsonObject = (JSONObject) jsonParser.parse(json);	
+			jsonObject = (JSONObject) jsonParser.parse(json);
 			
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == -2);
 	    	assertEquals(jsonObject.get("desc"), "매우 부족");
 	    	
 	    	json = indi.getTotalCalorieIndicate(1599, 19, false);
-			jsonObject = (JSONObject) jsonParser.parse(json);	
+			jsonObject = (JSONObject) jsonParser.parse(json);
 			
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == -1);
 	    	assertEquals(jsonObject.get("desc"), "부족");
 	    	
 	    	json = indi.getTotalCalorieIndicate(1599, 10, false);
-			jsonObject = (JSONObject) jsonParser.parse(json);	
+			jsonObject = (JSONObject) jsonParser.parse(json);
 			
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == -99);
 	    	assertEquals(jsonObject.get("desc"), "평가 불가");
@@ -255,9 +255,7 @@ public class NutrientIntakeStandardTest extends TestCase {
 	    	assertEquals(jsonObject.get("desc"), "충분");
 	    	
 	    	json = indi.getWaterIndicate(2800, 67, false);
-			jsonObject = (JSONObject) jsonParser.parse(json);	
-			
-			System.out.println(jsonObject);
+			jsonObject = (JSONObject) jsonParser.parse(json);
 			
 			assertTrue(((Long)(jsonObject.get("code"))).intValue() == -99);
 	    	assertEquals(jsonObject.get("desc"), "평가 불가");
