@@ -19,8 +19,8 @@
  	"MEAL_TYPE" : {
  		"mapping" : "loggedFood/mealTypeId",
  		"type" : "integer",
- 		"value_trasform" : {
- 		}
+ 		"unit" : "hashmap",
+ 		"format" : "1:1,2:4,3:2,4:4,5:3,7:7" 		
  	},
  	"TOTAL_FAT" : {
  		"mapping" : "nutritionalValues/fat",

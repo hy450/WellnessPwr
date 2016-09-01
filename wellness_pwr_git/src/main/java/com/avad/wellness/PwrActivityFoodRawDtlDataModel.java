@@ -1,5 +1,9 @@
 package com.avad.wellness;
 
+import java.util.Map;
+
+import com.google.common.base.Splitter;
+
 public class PwrActivityFoodRawDtlDataModel {
 	String food_dtl_logged_id;
 	String provider_id;
@@ -140,6 +144,15 @@ public class PwrActivityFoodRawDtlDataModel {
 		}else if( value instanceof Float){
 			this.meal_type = ((Float)value).intValue();
 		}	
+		
+		if( typeInfo.getUnit().equals("hashmap")){
+			String format = typeInfo.getFormat();
+			Map<String,String> map = Splitter.on(",").trimResults()
+			.withKeyValueSeparator(":").split(format);
+			
+			//모두 String 이 Integer 라고 규정
+			this.meal_type = Integer.parseInt(map.get(String.valueOf(this.meal_type)));
+		}
 	}
 
 

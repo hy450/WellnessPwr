@@ -223,7 +223,7 @@ public class ConverterTest extends TestCase {
 	    	assertEquals("쌀밥", model.get(0).food_name);	    	
 	    	assertTrue(1 == model.get(0).amount );
 	    	assertEquals(271.0 , model.get(0).calorie );
-	    	assertEquals(1, model.get(0).meal_type);
+	    	assertEquals(4, model.get(0).meal_type);
 	    	assertEquals(0.44 , model.get(0).total_fat );
 	    	assertEquals(59.67 , model.get(0).carbohydrate );
 	    	assertEquals(0.6 , model.get(0).dietary_fiber );
@@ -350,13 +350,9 @@ public class ConverterTest extends TestCase {
 	    	assertEquals(54.11111, model.get(0).iron);
 	    	assertEquals(0.0, model.get(0).cholestrol);
 	    	
-	    	
 	    	assertEquals(3.2888888, model.get(1).dietary_fiber);
 	    	assertEquals(975.3333, model.get(1).calorie);
 	    	assertEquals(1.8441111, model.get(1).polysaturated_fat);
-	    	
-	    	
-	    	
 	    	
 			
 		}catch( Exception e){
